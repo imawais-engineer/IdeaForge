@@ -1,0 +1,967 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "content": "# 2. File Upload to Pinecone Vector Database - RAG Set Up",
+        "height": 592,
+        "width": 1824,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1696,
+        -928
+      ],
+      "id": "75f27d30-6c7f-4c46-846b-d2deafcdde28",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "openai/gpt-oss-120b",
+          "mode": "list",
+          "cachedResultName": "openai/gpt-oss-120b"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -928,
+        -1216
+      ],
+      "id": "a93d453d-7ae6-4bca-83c5-4ac2e8f42ff8",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "mYfvFyqIseIBnqXI",
+          "name": "Groq"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "databaseName": "Ideate"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1.1,
+      "position": [
+        -736,
+        -1152
+      ],
+      "id": "f3e7db8c-ae0d-45bc-a832-b0b26bef729f",
+      "name": "MongoDB Chat Memory",
+      "credentials": {
+        "mongoDb": {
+          "id": "vlwcave5MJWGBQ5c",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chunkSize": 3000,
+        "chunkOverlap": 500,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        -464
+      ],
+      "id": "ab3bb730-f3e4-40b8-a172-52d3df0b8e7e",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "textSplittingMode": "custom",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "external_file_url",
+                "value": "={{ $json.urls }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -384,
+        -672
+      ],
+      "id": "6a79d60a-6352-44df-96c0-f8d948636c67",
+      "name": "Default data loader"
+    },
+    {
+      "parameters": {
+        "content": "# 1. Chat Interface for AI Agent",
+        "height": 800,
+        "width": 1824,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1696,
+        -1744
+      ],
+      "typeVersion": 1,
+      "id": "5d430546-0dd3-4207-abf0-365356c386c6",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "modelName": "sentence-transformers/all-mpnet-base-v2",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        -608,
+        -656
+      ],
+      "id": "b829a42d-116e-46a8-a5ca-2361591cab55",
+      "name": "Embeddings HuggingFace Inference1",
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "01mHhWRTGSmESG50",
+          "name": "Hugging Face account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Retrieve data from Pinecone Vector Store",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8n-dense-index",
+          "mode": "list",
+          "cachedResultName": "n8n-dense-index"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        -288,
+        -1088
+      ],
+      "id": "169785ca-6cbf-4a32-b029-292f2f29eb37",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "OwZPtXXLwz9EYC2h",
+          "name": "Pinecone | AIMadeQuotes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"documentTitle\": \"string\",\n  \"documentType\": \"string\",\n  \"fullMarkdownContent\": \"string\",\n  \"keyRecommendations\": [\"string\"],\n  \"nextSteps\": [\"string\"]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -1008,
+        80
+      ],
+      "id": "88d5099f-8429-49d8-9cb4-f795e9763c96",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "content": "# 3. Create User Document on Demand",
+        "height": 592,
+        "width": 1824,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1696,
+        -304
+      ],
+      "id": "9815123c-d0cc-4c85-8e3b-51e26811223d",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "**Welcome to IdeaForge.**\n\nI am your Second Brain Coach, designed to translate concepts into structured execution plans.\n\nPlease state your objective to begin—such as startup planning, document preparation, academic pilot design, or career decision support.",
+        "options": {
+          "allowFileUploads": true,
+          "inputPlaceholder": "Ask IdeaForge",
+          "loadPreviousSession": "notSupported",
+          "showWelcomeScreen": false,
+          "subtitle": "Your AI Second Brain Coach | Turn Ideas into Action",
+          "title": "IdeaForge - Zero-to-One Builder",
+          "customCss": "/* === IdeaForge Modern Chat Theme === */\n\n--chat--background: #0f172a;           /* Deep navy background */\n--chat--color-primary: #22d3ee;        /* Electric cyan accent */\n--chat--color-secondary: #64748b;\n--chat--color-light: #f8fafc;\n--chat--color-dark: #0f172a;\n\n/* Header */\n--chat--header--background: #1e2937;\n--chat--header--color: #e2e8f0;\n\n/* Messages */\n.chat-message--user {\n    background: #22d3ee;\n    color: #0f172a;\n    border-radius: 18px 18px 4px 18px;\n}\n\n.chat-message--assistant {\n    background: #1e2937;\n    border-radius: 18px 18px 18px 4px;\n    border-left: 4px solid #22d3ee;\n}\n\n/* Input Area */\n--chat--input--background: #1e2937;\n--chat--input--text-color: #e2e8f0;\n--chat--input--border: 1px solid #334155;\n--chat--input--border-active: 1px solid #22d3ee;\n\n/* Buttons */\n--chat--button--background--primary: #22d3ee;\n--chat--button--color--primary: #0f172a;\n--chat--button--background--primary--hover: #67e8f9;\n\n/* Overall Polish */\n.chat-container {\n    font-family: 'Inter', system-ui, sans-serif;\n}\n\n.chat-message {\n    max-width: 85%;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);\n}\n\n/* Markdown improvements */\n.chat-message pre {\n    background: #0f172a;\n    border-radius: 8px;\n}",
+          "responseMode": "streaming"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -1552,
+        -1600
+      ],
+      "id": "1dba8967-6b75-4578-8d2b-d6eead7a736a",
+      "name": "Chat Trigger",
+      "webhookId": "dd8709a3-30c4-4a2b-8386-7c5a2e4e2459"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1ea775f5-0aaa-42c8-b7f1-f81ec12ee2dd",
+              "leftValue": "={{ $binary.data0 }}",
+              "rightValue": ".pdf",
+              "operator": {
+                "type": "object",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1232,
+        -1600
+      ],
+      "id": "a20ca1b2-edc6-48b8-820a-0c3c8605aa86",
+      "name": "Check If File Uploaded"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2da1176-8187-443c-afcd-8f35e69ad86c",
+              "name": "binary",
+              "value": "={{ $binary }}",
+              "type": "string"
+            },
+            {
+              "id": "beca5a57-26b9-4cf3-b9ad-624cdd5dc8c6",
+              "name": "fileName",
+              "value": "={{ $binary.data0.fileName || $binary.data.fileName }}",
+              "type": "string"
+            },
+            {
+              "id": "a821cd7f-c323-4b13-850a-7f4cb31536f5",
+              "name": "mimeType",
+              "value": "={{ $binary.data0.mimeType || $binary.data.mimeType }}",
+              "type": "string"
+            },
+            {
+              "id": "f0a42a64-6d08-4c81-b8d6-9be98cf692ed",
+              "name": "message",
+              "value": "={{ $json.chatInput }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -736,
+        -1696
+      ],
+      "id": "55007625-3bbc-4ad9-a796-ca38e90e87de",
+      "name": "Configure Variables"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=**Uploaded File**: {{ $json.fileName }}\n**File Type**: {{ $json.mimeType }}\n\n**User Request**: {{ $json.message }}",
+        "options": {
+          "systemMessage": "=You are IdeaForge Document Assistant — a professional reviewer and improver for student portfolios, resumes, cover letters, proposals, and similar documents.\n\n**Rules**:\n- Analyze the uploaded document thoroughly and professionally.\n- Be constructive, encouraging, and specific. Use real examples from the document.\n- Provide clear, actionable feedback with priorities.\n- Use clean Markdown formatting (headings, bullets, tables if needed).\n\nEnsure it is formmatted well in n8n Public Chat UI."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -352,
+        -1696
+      ],
+      "id": "9f96a8a4-bde1-47e9-9017-066320aff131",
+      "name": "Document Processing Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "MiniMax-M3",
+          "mode": "list",
+          "cachedResultName": "MiniMax-M3"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -416,
+        -1504
+      ],
+      "id": "668a6a13-1980-475b-9817-b6f0805452b4",
+      "name": "OpenAI - GPT OSS 120 B",
+      "credentials": {
+        "openAiApi": {
+          "id": "3Orw3SaWTNjg5h5D",
+          "name": "tokenrouter MiniMax-M3"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1.1,
+      "position": [
+        -288,
+        -1424
+      ],
+      "id": "b432d376-0f53-4664-b079-d17a792d8710",
+      "name": "MongoDB Chat Memory (Storage | Context)",
+      "credentials": {
+        "mongoDb": {
+          "id": "vlwcave5MJWGBQ5c",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are IdeaForge, a responsible and thoughtful Second Brain Coach for college students, recent graduates, and aspiring founders.\n\n<RETRIEVED_CONTEXT>\n{{ $json[\"retrievedContext\"] || $json.text || \"\" }}\n</RETRIEVED_CONTEXT>\n\nStrict Rules You Must Always Follow (from RAG documents):\n- Help users move from vague idea → structured plan → first real step.\n- Always clarify the idea first.\n- Surface key assumptions and risks with confidence levels.\n- Never act as just a task generator — provide deep reasoning and tradeoffs.\n- Represent uncertainty honestly. Use confidence scores (Low / Medium / High).\n- Always include multiple perspectives where relevant.\n- Maintain supportive, realistic, and encouraging tone.\n- End with a clear Human Decision Moment.\n\nMandatory Response Structure (Follow this format exactly):\n\n1. Idea Clarification  \n[One refined paragraph summarizing the idea + user context]\n\n2. Key Assumptions & Risks  \n- Assumption 1: ... (Confidence: Medium)  \n- Risk 1: ... (Severity: High) → Suggested Mitigation  \n\n3. Recommended Execution Roadmap  \n- Phase 1: Validation (Week 1-2)  \n- Phase 2: MVP Design & Build  \n- Phase 3: Testing & Launch  \n\n4. 30-Day Action Plan  \n- Days 1-7: [Very concrete, realistic first step]  \n- Days 8-15: ...  \n\n5. Study / Life Balance  \nContinue your studies as the top priority. Dedicate a maximum of 1 focused hour per day to this project initially to avoid burnout.\n\n6. Final Recommendation & Next Step  \n[Clear, immediate actionable first step]  \n\nThis is a thinking aid only, not a definitive plan. The final prioritization, decisions, and commitment to execute remain entirely with you.\n\nAlways be realistic, honest about uncertainty, and encouraging.\n\nWhen outputting the response, use clean Markdown formatting (bold, bullets, tables where appropriate). Keep each section concise and scannable.\n\nEnsure it is formmatted well in n8n Public Chat UI."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -784,
+        -1424
+      ],
+      "id": "a4a783f2-94cf-477e-a8b0-cb8c84cfa844",
+      "name": "IdeaForge: AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1440,
+        -832
+      ],
+      "id": "4a219041-d03e-4154-bf01-7590c619fb61",
+      "name": "Execute To Upload Files to DB"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d0e724df-685f-4661-b2ec-3cdd3c2ba0f1",
+              "name": "urls",
+              "value": "=[\"https://drive.google.com/file/d/1Gp-PoUcGmcWKKouX9KIcs4iaAaCMJWm1/view?usp=drive_link\", \"https://drive.google.com/file/d/1Mx0sKlhdBv7akPP7xMK_7ox-maCzeKj3/view?usp=drive_link\"]",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1216,
+        -832
+      ],
+      "id": "074f3e16-ac3e-4745-93a2-29256b74656e",
+      "name": "Enter The URLs of Files"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "urls",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -1008,
+        -832
+      ],
+      "id": "10b1ab1e-1eee-41a8-be2f-60c614b7a3ee",
+      "name": "URLs: Array to List"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.urls }}",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "id": "85b9b0d1-b0f2-478f-84fe-c24ada740b8e",
+      "name": "Download all Files",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        -784,
+        -832
+      ],
+      "typeVersion": 3,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "qg88l59HR0gAE4va",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8n-dense-index",
+          "mode": "list",
+          "cachedResultName": "n8n-dense-index"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        -352,
+        -864
+      ],
+      "id": "09bb27ab-07f3-41f6-a403-8a5ed6bffeb3",
+      "name": "Pinecone Vector DB",
+      "credentials": {
+        "pineconeApi": {
+          "id": "OwZPtXXLwz9EYC2h",
+          "name": "Pinecone | AIMadeQuotes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formTitle": "IdeaForge Document Assistant",
+        "formDescription": "Upload your document and tell us what you need. I'll review it and create a professional draft or detailed feedback.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Full Name",
+              "placeholder": "e.g. Muhammad Awais",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email Address",
+              "fieldType": "email",
+              "placeholder": "your@email.com",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "What type of document do you need help with?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Resume Improvement"
+                  },
+                  {
+                    "option": "Cover Letter Generation"
+                  },
+                  {
+                    "option": "Portfolio Review & Feedback"
+                  },
+                  {
+                    "option": "Business Proposal"
+                  },
+                  {
+                    "option": "LinkedIn Profile / Bio "
+                  },
+                  {
+                    "option": "Other (please specify in context)"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Target Job Title (if applicable)",
+              "placeholder": "e.g. Full Stack Developer"
+            },
+            {
+              "fieldLabel": "Company Name (if applicable)",
+              "placeholder": "e.g. Google"
+            },
+            {
+              "fieldLabel": "Additional Context or Specific Requests",
+              "placeholder": "e.g. Target industry, key achievements, tone preference, etc."
+            },
+            {
+              "fieldLabel": "Document You May Upload",
+              "fieldType": "file",
+              "multipleFiles": false
+            }
+          ]
+        },
+        "options": {
+          "customCss": ":root {\n  --form-bg: #0f172a;\n  --accent: #22d3ee;\n  --text: #e2e8f0;\n  --card: #1e2937;\n}\n\n.form-container {\n  background: var(--form-bg);\n  color: var(--text);\n  font-family: 'Inter', system-ui, sans-serif;\n}\n\n.form-card {\n  background: var(--card);\n  border-radius: 16px;\n  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);\n}\n\ninput, textarea, select {\n  background: #334155;\n  border: 1px solid #475569;\n  color: #e2e8f0;\n  border-radius: 8px;\n}\n\ninput:focus, textarea:focus, select:focus {\n  border-color: var(--accent);\n  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);\n}\n\nbutton[type=\"submit\"] {\n  background: var(--accent);\n  color: #0f172a;\n  font-weight: 600;\n  border-radius: 8px;\n  padding: 14px 32px;\n}"
+        }
+      },
+      "id": "bf0395e2-1a64-494d-9fc7-dd2ffd47020f",
+      "name": "Submit Data via Form",
+      "type": "n8n-nodes-base.formTrigger",
+      "position": [
+        -1456,
+        -160
+      ],
+      "webhookId": "b11f88d7-5163-4b94-9251-296278b63380",
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=**User Request**: {{ $json.message || \"Please review and professionally improve this document.\" }}\n\n**Uploaded File**: {{ $json['Document You May Upload'].filename }}\n**File Type**: {{ $json['Document You May Upload'].mimetype }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are IdeaForge Document Brain — a highly professional and expert career document assistant for students and early professionals.\n\nYou are given an uploaded file and user details. Your job is to **analyze the file** and **create or improve** the requested document professionally.\n\n**Rules**:\n- Carefully analyze the uploaded file content.\n- Create a clean, professional, achievement-focused document.\n- Use strong action verbs and quantify achievements where possible.\n- Never invent information — base everything on provided data.\n- Output in excellent, well-formatted Markdown.\n- Be encouraging but honest.\n\n**User Details**:\n- Name: {{ $json['Full Name'] }}\n- Email: {{ $json['Email Address'] }}\n- Target Job: {{ $json['Target Job Title (if applicable)'] }}\n- Company: {{ $json['Company Name (if applicable)'] }}\n- Document Type Requested: {{ $json['What type of document do you need help with?'] }}\n- Additional Context: {{ $json['Additional Context or Specific Requests'] }}\n\nMake it sure to create the required document."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -1184,
+        -160
+      ],
+      "id": "64f036bf-d1bb-4195-ac8d-8db639340cd3",
+      "name": "Data Analyze - Task Execute"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "openai/gpt-oss-120b",
+          "mode": "list",
+          "cachedResultName": "openai/gpt-oss-120b"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -1232,
+        80
+      ],
+      "id": "c594596c-c766-4dd1-8f6e-1a519566ae76",
+      "name": "OpenAI Chat Model - oss 120 b",
+      "credentials": {
+        "openAiApi": {
+          "id": "mYfvFyqIseIBnqXI",
+          "name": "Groq"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0eff1c38-6e6d-49f4-b3d8-257b6757ba49",
+              "name": "fileName",
+              "value": "={{ $('Submit Data via Form').item.json['Upload your current document (PDF, DOCX, etc.)'].filename }}",
+              "type": "string"
+            },
+            {
+              "id": "7f12ca66-7258-4438-8621-640a8aa6fe40",
+              "name": "mimeType",
+              "value": "={{ $('Submit Data via Form').item.json['Upload your current document (PDF, DOCX, etc.)'].mimetype }}",
+              "type": "string"
+            },
+            {
+              "id": "21f456d8-ecb9-464d-ad33-c27e7bc0d68e",
+              "name": "binary",
+              "value": "={{ $binary }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -832,
+        -160
+      ],
+      "id": "45423d2a-fa4c-4d65-8970-4cd8976d7d20",
+      "name": "Structure Output - Configuration"
+    },
+    {
+      "parameters": {
+        "folderId": "1cw1EfA1BhlxGOQnmkVfvRzQ4RY2ViMMd",
+        "title": "={{ $json.fileName }}"
+      },
+      "id": "73cb86a1-7167-4a79-8bad-7eaf10adbc2a",
+      "name": "Create Document - Docs",
+      "type": "n8n-nodes-base.googleDocs",
+      "position": [
+        -576,
+        -160
+      ],
+      "typeVersion": 2,
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "Lxl890jkSv2kJxxN",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $('Data Analyze - Task Execute').item.json.output }}"
+            }
+          ]
+        }
+      },
+      "id": "ec40e14c-31d8-4cd9-a9c0-bc0b6d993b51",
+      "name": "Update Doc with AI Response",
+      "type": "n8n-nodes-base.googleDocs",
+      "position": [
+        -336,
+        -160
+      ],
+      "typeVersion": 2,
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "Lxl890jkSv2kJxxN",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "respondWith": "redirect",
+        "redirectUrl": "=https://docs.google.com/document/d/{{ $json.documentId }}",
+        "options": {}
+      },
+      "id": "af9896dd-3bf9-4069-b4dd-094a831f6047",
+      "name": "Make the Doc Available to the User",
+      "type": "n8n-nodes-base.form",
+      "position": [
+        -144,
+        -160
+      ],
+      "webhookId": "bc711897-4bf7-4d27-8aa5-62625343d631",
+      "typeVersion": 1
+    }
+  ],
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "IdeaForge: AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "IdeaForge: AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default data loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default data loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector DB",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector DB",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "IdeaForge: AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Document Processing Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Data Analyze - Task Execute",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Trigger": {
+      "main": [
+        [
+          {
+            "node": "Check If File Uploaded",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check If File Uploaded": {
+      "main": [
+        [
+          {
+            "node": "Configure Variables",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "IdeaForge: AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configure Variables": {
+      "main": [
+        [
+          {
+            "node": "Document Processing Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - GPT OSS 120 B": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Document Processing Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB Chat Memory (Storage | Context)": {
+      "ai_memory": [
+        [
+          {
+            "node": "Document Processing Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IdeaForge: AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Execute To Upload Files to DB": {
+      "main": [
+        [
+          {
+            "node": "Enter The URLs of Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enter The URLs of Files": {
+      "main": [
+        [
+          {
+            "node": "URLs: Array to List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "URLs: Array to List": {
+      "main": [
+        [
+          {
+            "node": "Download all Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download all Files": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector DB": {
+      "main": [
+        []
+      ]
+    },
+    "Submit Data via Form": {
+      "main": [
+        [
+          {
+            "node": "Data Analyze - Task Execute",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data Analyze - Task Execute": {
+      "main": [
+        [
+          {
+            "node": "Structure Output - Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model - oss 120 b": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Data Analyze - Task Execute",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structure Output - Configuration": {
+      "main": [
+        [
+          {
+            "node": "Create Document - Docs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Document - Docs": {
+      "main": [
+        [
+          {
+            "node": "Update Doc with AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Doc with AI Response": {
+      "main": [
+        [
+          {
+            "node": "Make the Doc Available to the User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9924bf8200b84f4a24316004de6e205d5f05abb998ead208352772f3aee3ee90"
+  }
+}
