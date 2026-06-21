@@ -101,17 +101,16 @@ Building great AI tools is more about **structuring thinking** and enforcing dis
 - Voice input and collaborative team features
 
 ---
+---
 
-**Made with ❤️ for USAII Hackathon 2026**  
-*Helping the next generation move from ideas to real execution.*
+**Made with ❤️ for USAII Hackathon 2026**
 
-**Repository Structure Suggestion**:
-ideaforge/
-├── README.md
-├── workflows/ideaforge-workflow.json
-├── attachments/
-├── screenshots/
-└── docs/
+*Helping the next generation of students and creators move from vague ideas to real execution.*
 
+### Built by
+**Muhammad Awais** & **Muhammad Zaid**
 
-Feel free to **fork**, improve prompts, or extend the system. Contributions welcome!
+### Submission
+Submitted on Devpost → [View Project on Devpost](https://devpost.com/software/neuronic-ai)
+
+---
