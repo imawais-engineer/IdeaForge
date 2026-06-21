@@ -1,55 +1,117 @@
+# IdeaForge: Zero-to-One Second Brain
+
+**USAII Hackathon 2026 - Undergraduate Track**  
+**Project**: The Second Brain  
+**Direction**: Zero To One Builder  
+
+![IdeaForge Hero](https://drive.google.com/uc?id=13lg5mwRhYElqEnSaZHcsySzbRojlW9f7)
+
+**Modern AI Second Brain Coach** | Turn Vague Ideas Into Actionable First Steps
+
+## 🎥 Demo Video
+
+[![IdeaForge Demo Video](https://img.youtube.com/vi/g2tj21erVDQ/maxresdefault.jpg)](https://youtu.be/g2tj21erVDQ)
+
+**Watch the full demo** → [YouTube: IdeaForge: Zero-to-One Builder Challenge | Made in n8n](https://youtu.be/g2tj21erVDQ)
+
+## 🚀 Try It Live
+
+**[Try IdeaForge Now](https://n8nio.imawais.engineer/webhook/dd8709a3-30c4-4a2b-8386-7c5a2e4e2459/chat)**
+
+*Modern dark UI with cyan accents — mobile-friendly chat experience*
+
 ## Inspiration
-The hackathon brief for **"Build the Second Brain for Real Life"** deeply resonated with us. As college students and aspiring creators, we repeatedly saw talented peers with promising ideas — campus startups, innovative class projects, and personal ambitions — get stuck in execution paralysis. Modern life brings overwhelming information, hidden tradeoffs, and constant mental switching, yet most tools either oversimplify (basic pros/cons or generic task lists) or overwhelm users. We set out to build a practical tool that fills this gap by acting as a **reasoning partner** — helping users move from vague ideas to structured, realistic plans with clear first steps.
 
-## What it does
-**IdeaForge: Zero-to-One Second Brain** is an AI-powered Second Brain Coach that helps college students, recent graduates, aspiring founders, and career-switchers transform vague ideas into actionable execution plans.
+The hackathon brief for **"Build the Second Brain for Real Life"** deeply resonated with us. As college students and aspiring creators, we saw talented peers with strong ideas — campus startups, class projects, and personal ambitions — frequently stuck in **execution paralysis**.
 
-Users describe their idea in natural language along with personal context (studies, time constraints, resources, etc.). The system:
-- Clarifies and refines the idea
-- Surfaces key assumptions and risks with confidence levels
-- Delivers a structured execution roadmap (including a realistic 30-day action plan)
-- Emphasizes study/life balance and burnout prevention
-- Always ends with a clear **Human Decision Moment**
+Modern life overwhelms us with information, hidden tradeoffs, and constant context switching. Most tools either oversimplify (generic task lists) or add more noise. **IdeaForge** fills this gap by acting as a thoughtful **reasoning partner** — helping users move from vague ideas to structured, realistic plans with clear first steps.
 
-Every response follows a consistent, scannable format and includes responsible AI elements: uncertainty framing, confidence scores (Low/Medium/High), tradeoffs, and explicit disclaimers that the final decisions remain with the user.
+## What It Does
 
-It also includes a **Document Assistant** mode where users can upload resumes, cover letters, or other documents to get professional feedback or generate improved versions directly into Google Docs.
+**IdeaForge** is an AI-powered Second Brain Coach for college students, recent graduates, aspiring founders, and career-switchers.
 
-## How we built it
-We built a functional, production-ready workflow in **n8n** following a thoughtful software engineering approach:
+### Core Features
+- **Idea Clarification** — Refines vague concepts with personal context
+- **Assumptions & Risks Analysis** — Surfaces key assumptions with confidence scores (Low/Medium/High)
+- **Structured Roadmaps** — Phased execution plans + realistic 30-day action plans
+- **Life Balance Focus** — Built-in guidance on studies, burnout prevention, and sustainable execution
+- **Human Decision Moment** — Every response ends with clear disclaimers: *final decisions always remain with you*
+- **Document Assistant** — Upload resumes, cover letters, or proposals → professional feedback or Google Docs generation
 
-**Core Components:**
-- **Intelligent Chat Interface** with custom styling and conversation memory (MongoDB)
-- **Powerful Main Agent** (`IdeaForge`) powered by Groq (gpt-oss-120b) with a carefully engineered system prompt enforcing the mandatory response structure
-- **RAG System** using Pinecone vector database + Hugging Face embeddings, pre-loaded with hackathon guidelines and SRS documents for consistent, context-aware responses
-- **Document Processing Branch**: Handles file uploads (PDFs, DOCX), analyzes them, and creates/improves documents using Google Docs integration
-- **Responsible AI Guardrails** embedded directly into the agent prompts
+![Main Agent Workflow](https://drive.google.com/uc?id=1yrCHeDvgypUiychkT53CDAK57HFhGl0g)
 
-The architecture creates a clean pipeline:  
-**Chat Input → Context Retrieval (RAG) → Structured Reasoning → Formatted Output → Actionable Next Step**
+## How We Built It
 
-## Challenges we ran into
-- Crafting prompts that produce deep reasoning instead of generic task lists required significant iteration.
-- Balancing comprehensive analysis with concise, student-friendly outputs.
-- Implementing robust file handling and Google Docs automation while keeping the workflow reliable.
-- Ensuring strong uncertainty representation and human-in-the-loop principles without making the experience feel overly cautious.
+We followed a structured SDLC approach and built a functional, reliable system in **n8n**.
 
-## Accomplishments that we're proud of
-- Delivered a fully working, responsive AI coach that follows the exact response structure required by the hackathon brief.
-- Successfully implemented RAG with relevant project documents for grounded, consistent responses.
-- Built a dual-purpose system: idea-to-execution coaching + professional document assistance.
-- Embedded Responsible AI practices (confidence scores, risk/mitigation framing, explicit human decision points) throughout.
-- Created a clean, modern chat UI with custom CSS and seamless Google Docs export.
+### Architecture Highlights
+- **Chat Interface** with custom CSS and welcome screen
+- **Main AI Agent** powered by Groq (`gpt-oss-120b`) with strict system prompt
+- **RAG Pipeline** — Pinecone vector store + Hugging Face embeddings (loaded with hackathon guidelines & SRS)
+- **MongoDB** — Persistent chat memory
+- **Document Branch** — File upload handling + Google Docs automation
+- **Responsible AI Guardrails** — Embedded throughout (uncertainty framing, risks, mitigations, human-in-the-loop)
 
-## What we learned
-We learned that building effective decision-support AI is more about **structuring thinking** and enforcing disciplined reasoning than about raw model power. Prompt engineering for consistency and responsibility is just as important as the underlying technology. We also gained hands-on experience with n8n orchestration, vector databases (Pinecone), and integrating AI with productivity tools.
+![RAG & Guardrails Setup](https://drive.google.com/uc?id=1fLxffjypqWRuyFzj2hrT1Q-zwkeRjQbd)  
+![Document Agent Branch](https://drive.google.com/uc?id=19sJ6Zq5KbElJPV3jEAiUVNLVSjfTWLBI)
 
-## What's next for IdeaForge
-We plan to evolve IdeaForge by:
-- Expanding into a true multi-agent system (Clarifier, Risk Analyzer, Planner, Simulator, Orchestrator)
-- Adding more integrations (Google Calendar, Notion, export to PDF/Word)
-- Implementing user feedback loops and progress tracking
-- Creating specialized templates for common student scenarios (career decisions, side hustles, class projects to pilots)
-- Making the project open-source so other students can build upon it
+**Tech Stack**:
+- n8n (orchestration)
+- Groq + MiniMax models
+- Pinecone + Hugging Face
+- Google Drive/Docs
+- MongoDB
 
-IdeaForge is a practical step toward a real "Second Brain" for the next generation of creators and founders.
+## Project Resources
+
+**Full Google Drive Folder**: [https://drive.google.com/drive/folders/1FLcqa7huEboNHa9eUjoAjnaJwAvy06M_](https://drive.google.com/drive/folders/1FLcqa7huEboNHa9eUjoAjnaJwAvy06M_?usp=sharing)
+
+### Key Files
+- **Workflow JSON** — [Start-up Ideas Generator.json](https://drive.google.com/file/d/1Gp-PoUcGmcWKKouX9KIcs4iaAaCMJWm1/view?usp=drive_link)
+- **RAG Global Instructions** — [Download PDF](https://drive.google.com/file/d/1fLxffjypqWRuyFzj2hrT1Q-zwkeRjQbd/view?usp=drive_link)
+- **SRS Document** — [Download PDF](https://drive.google.com/file/d/1Mx0sKlhdBv7akPP7xMK_7ox-maCzeKj3/view?usp=drive_link)
+- **UI Screenshot** — [View](https://drive.google.com/file/d/13lg5mwRhYElqEnSaZHcsySzbRojlW9f7/view?usp=drive_link)
+- **Main Agent** — [View](https://drive.google.com/file/d/1yrCHeDvgypUiychkT53CDAK57HFhGl0g/view?usp=drive_link)
+- **RAG Setup** — [View](https://drive.google.com/file/d/1fLxffjypqWRuyFzj2hrT1Q-zwkeRjQbd/view?usp=drive_link)
+- **Document Agent** — [View](https://drive.google.com/file/d/19sJ6Zq5KbElJPV3jEAiUVNLVSjfTWLBI/view?usp=drive_link)
+
+## Challenges & Accomplishments
+
+**Challenges**:
+- Deep prompt engineering for structured reasoning (avoiding generic lists)
+- Reliable RAG + file handling
+- Balancing depth with scannable, encouraging outputs
+
+**Proud Achievements**:
+- Fully functional system matching hackathon mandatory response structure
+- Strong Responsible AI implementation
+- Clean, professional UI + seamless Google Docs export
+- Dual-purpose tool (Idea Coaching + Document Assistant)
+
+## What We Learned
+
+Building great AI tools is more about **structuring thinking** and enforcing disciplined reasoning than raw model power. Responsible AI guardrails and human-in-the-loop design significantly increase trustworthiness.
+
+## What's Next
+
+- Full multi-agent orchestration (Clarifier, Risk Analyzer, Planner, Simulator, Orchestrator)
+- Calendar & Notion integrations
+- Progress tracking & feedback loops
+- Open-source templates for common student scenarios
+- Voice input and collaborative team features
+
+---
+
+**Made with ❤️ for USAII Hackathon 2026**  
+*Helping the next generation move from ideas to real execution.*
+
+**Repository Structure Suggestion**:
+ideaforge/
+├── README.md
+├── workflows/ideaforge-workflow.json
+├── attachments/
+├── screenshots/
+└── docs/
+
+
+Feel free to **fork**, improve prompts, or extend the system. Contributions welcome!
