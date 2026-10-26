@@ -88,7 +88,7 @@ We followed a structured SDLC approach and built a functional, reliable system i
 - Clean, professional UI + seamless Google Docs export
 - Dual-purpose tool (Idea Coaching + Document Assistant)
 
-## What We Learned
+## Key Engineering Insights
 
 Building great AI tools is more about **structuring thinking** and enforcing disciplined reasoning than raw model power. Responsible AI guardrails and human-in-the-loop design significantly increase trustworthiness.
 
